@@ -1,0 +1,56 @@
+body {
+  padding: 5%;
+  text-align: center;
+}
+
+.form {
+  display: inline-block;
+  width: 30em;
+}
+
+.form-label {
+  float: left;
+}
+
+.link-home {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}
+
+.card {
+  display: block;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.card-prompt {
+  display: inline-block;
+  text-align: left;
+  width: 70%;
+}
+
+.card-answer {
+  display: inline-block;
+  text-align: right;
+  width: 30%;
+}
+
+.text-hidden {
+  visibility: hidden;
+}
+
+.text-revealed {
+  animation: fade-in;
+  animation-duration: 1s;
+  visibility: visible;
+}
+
+@keyframes fade-in {
+  from { opacity: 0 }
+  to { opacity: 100 }
+}
