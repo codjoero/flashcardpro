@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
 import { addStack } from '../actions';
+import FormInput from './FormInput';
 
 export class StackForm extends Component {
   state = {
     title: '',
     cards: []
+  }
+
+  handleOnChange = event => {
+    this.setState({title: event.target.value});
   }
 
   handleAddCard = () => {
@@ -29,7 +33,6 @@ export class StackForm extends Component {
   }
 
   render() {
-    const { title, cards } = this.state;
     return (
       <div>
         <Link to='/' className="link-home">
@@ -37,42 +40,13 @@ export class StackForm extends Component {
         </Link>
         <h4>Create a New Stack</h4>
         <br />
-        <Form className="form">
-          <Form.Group as={Row} controlId="formTitle">
-            <Form.Label column sm="2">
-              Title:
-            </Form.Label>
-            <Col sm="10">
-              <Form.Control
-                value={title}
-                onChange={event => this.setState({title: event.target.value})}
-              />
-            </Col>
-          </Form.Group>
-          {cards.map((card, index) => (
-            <div key={card.id}>
-              <hr />
-              <Form.Row>
-                <Form.Group as={Col} controlId="formPrompt">
-                  <Form.Label className="form-label">Prompt</Form.Label>
-                  <Form.Control
-                    onChange={event => this.updateCardPart(event, index, 'prompt')}
-                  />
-                </Form.Group>
-                <Form.Group as={Col} controlId="formAnswer">
-                  <Form.Label className="form-label">Answer</Form.Label>
-                  <Form.Control
-                    onChange={event => this.updateCardPart(event, index, 'answer')}
-                  />
-                </Form.Group>
-              </Form.Row>
-            </div>
-          ))}
-        </Form>
-        <br />
-        <Button onClick={() => this.handleAddCard()}>Add Card</Button>
-        {' '}
-        <Button onClick={() => this.handleAddStack()}>Save and Add Stack</Button>
+        <FormInput 
+          state={this.state}
+          handleOnChange={this.handleOnChange}
+          handleAddCard={this.handleAddCard}
+          updateCardPart={this.updateCardPart}
+          handleAddStack={this.handleAddStack}
+        />
       </div>
     );
   }

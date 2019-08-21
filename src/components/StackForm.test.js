@@ -13,89 +13,54 @@ describe('StackForm', () => {
     expect(stackForm.find('h4').at(0).text()).toEqual('Home');
   });
 
-  it('renders a Form component', () => {
-    expect(stackForm.find('Form').exists()).toBeTruthy();
-  });
-
-  it('renders a Button to add a new card', () => {
-    expect(stackForm.find('Button').at(0).props().children).toEqual('Add Card');
-  });
-
-  it('renders a Button to submit the form', () => {
-    expect(stackForm.find('Button').at(1).props().children).toEqual('Save and Add Stack');
+  it('renders the `FormInput`', () => {
+    expect(stackForm.find('FormInput').exists()).toBe(true);
   });
 
   describe('and updating the title', () => {
     const event = { target: { value: 'change title' } };
     beforeEach(() => {
-      stackForm.find('FormControl')
-        .simulate('change', event);
+      stackForm.find('FormInput').props().handleOnChange(event);
     });
 
     it('updates title in state', () => {
-      expect(stackForm.state().title).toEqual(event.target.value);
+      expect(stackForm.state().title).toBe(event.target.value);
     });
   });
 
   describe('when adding a new card', () => {
     beforeEach(() => {
-      stackForm.find('Button').at(0).simulate('click');
+      stackForm.find('FormInput').props().handleAddCard();
     });
 
     afterEach(() => {
-      stackForm.setState({ cards: [] });
+      stackForm.setState({ title: '', cards: [] });
     });
 
     it('adds a new card to the state', () => {
-      expect(stackForm.state().cards.length).toEqual(1);
+      expect(stackForm.state().cards.length).toBe(1);
     });
 
-    it('renders the propmt section', () => {
-      expect(stackForm.find('FormLabel').at(1).props().children).toEqual('Prompt');
-    });
-
-    it('renders the answer section', () => {
-      expect(stackForm.find('FormLabel').at(2).props().children).toEqual('Answer');
-    });
-
-    describe('and updating the card prompt', () => {
+    describe('and updating the card', () => {
       const event = { target: { value: 'change prompt' } };
+      const index = 0;
       beforeEach(() => {
-        stackForm.find('FormControl').at(1)
-          .simulate('change', event);
+        stackForm.find('FormInput').props().updateCardPart(event, index, 'prompt');
       });
-
+  
       it('updates the prompt in state', () => {
         expect(stackForm.state().cards[0].prompt).toEqual(event.target.value);
       });
-    });
 
-    describe('and updating the card answer', () => {
-      const event = { target: { value: 'change answer' } };
-      beforeEach(() => {
-        stackForm.find('FormControl').at(2)
-          .simulate('change', event);
-      });
-
-      it('updates the answer in state', () => {
-        expect(stackForm.state().cards[0].answer).toEqual(event.target.value);
-      });
-    });
-
-    describe('when adding a new stack', () => {
-      beforeEach(() => {
-        stackForm.setState({
-          title: 'change title',
-          cards: [ { id: 0, prompt: '', answer: 'change answer' } ]
+      describe('when adding a new stack', () => {
+        beforeEach(() => {
+          stackForm.setProps({ AddStack: jest.fn() });
+          stackForm.find('FormInput').props().handleAddStack();
         });
-        stackForm.setProps({
-          AddStack: jest.fn()
+    
+        it('resets the state', () => {
+          expect(stackForm.state().cards.length).toBe(0);
         });
-        stackForm.find('Button').at(1).simulate('click');
-      });
-
-      it('resets the state', () => {
-        expect(stackForm.state().cards).toEqual([]);
       });
     });
   });
