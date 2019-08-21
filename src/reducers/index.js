@@ -15,7 +15,7 @@ function stacks(state=[], action) {
     case LOAD_STACKS:
       return action.stacks;
     case ADD_STACK:
-      return [...state, {...action.stack, id: state.length}]
+      return [...state, {...action.stack, id: state.length}];
     default:
       return state;
   }

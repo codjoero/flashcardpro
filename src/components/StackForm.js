@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { addStack } from '../actions';
 
-class StackForm extends Component {
+export class StackForm extends Component {
   state = {
     title: '',
     cards: []
@@ -19,13 +19,13 @@ class StackForm extends Component {
   updateCardPart = (event, index, part) => {
     const { cards } = this.state;
     cards[index][part] = event.target.value;
-    this.setState({ cards })
+    this.setState({ cards });
   }
 
   handleAddStack = () => {
     const { AddStack } = this.props;
     AddStack(this.state);
-    this.setState({ title: '', cards: [] })
+    this.setState({ title: '', cards: [] });
   }
 
   render() {
@@ -74,7 +74,7 @@ class StackForm extends Component {
         {' '}
         <Button onClick={() => this.handleAddStack()}>Save and Add Stack</Button>
       </div>
-    )
+    );
   }
 }
 
