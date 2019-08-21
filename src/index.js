@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers'
+import rootReducer from './reducers';
 import App from './components/App';
 import Stack from './components/Stack';
 import StackForm from './components/StackForm';
@@ -14,7 +14,7 @@ import './index.css';
 const store = createStore(
   rootReducer,
   applyMiddleware(logger)
-  );
+);
 // store.subscribe(() => console.log('store', store.getState()));
 store.dispatch(setStack({ id: 0, title: 'example', cards: [] }));
 

@@ -19,7 +19,7 @@ class Card extends Component {
           </h4>
         </div>
       </div>
-    )
+    );
   }
 }
 

@@ -1,11 +1,40 @@
 {
   "extends": ["airbnb", "prettier", "prettier/react"],
-  "plugins": ["prettier"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true,
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "prettier"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [
-      1,
+    "indent": ["error", 2],
+    "no-console": 1,
+    "no-undef": 1,
+    "camelcase": 1,
+    "comma-dangle": "off",
+    "func-names": "off",
+    "consistent-return": "off",
+    "strict": ["error", "global"],
+    "semi": ["error", "always"],
+    "no-unused-expressions": ["error",
       {
-        "extensions": [".js", ".jsx"]
+        "allowShortCircuit": true
       }
     ],
     "react/prop-types": 0,
@@ -17,15 +46,22 @@
     "react/state-in-constructor": 0,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,
-  },
-  "globals": {
-    "window": true,
-    "document": true,
-    "localStorage": true,
-    "FormData": true,
-    "FileReader": true,
-    "Blob": true,
-    "navigator": true
-  },
-  "parser": "babel-eslint"
+    "react/no-unused-state": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "function-paren-newline": ["error", "consistent"],
+    "no-param-reassign":["error", { "props": false }],
+    "jsx-a11y/label-has-associated-control": [ "error", {
+      "required": {
+        "some": [ "nesting", "id"  ]
+      }
+    }],
+    "jsx-a11y/label-has-for": [ "error", {
+      "required": {
+        "some": [ "nesting", "id"  ]
+      }
+    }],
+    "import/no-named-as-default": 0,
+    "react/jsx-props-no-spreading": 0,
+  }
 }
